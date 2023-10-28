@@ -1,4 +1,5 @@
 # Welcome to Reflex!
+#Make sure to edit the main file, CalHacks10.py
 
 This is the base Reflex template - installed when you run `reflex init`.
 
