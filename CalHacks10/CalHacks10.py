@@ -25,8 +25,8 @@ def index():
             on_submit=FormState.handle_submit,
         ),
         rx.divider(),
-        rx.heading("Results"),
-        #rx.text(FormState.form_data.to_string()),
+        rx.heading("Test"),
+        rx.text(FormState.form_data.to_string()),
     )
 app = rx.App()
 app.add_page(index)

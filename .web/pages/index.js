@@ -76,8 +76,11 @@ export default function Component() {
 </Box>
   <Divider/>
   <Heading>
-  {`Results`}
+  {`Test`}
 </Heading>
+  <Text>
+  {JSON.stringify(form_state.form_data)}
+</Text>
 </VStack>
   <NextHead>
   <title>
