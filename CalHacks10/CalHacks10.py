@@ -46,7 +46,7 @@ def index():
                 rx.input(
                     placeholder="             Last Name", id="  last_name"
                 ),
-                rx.button("Submit", bg="lightblue", color="black", size="sm"),
+                rx.button("Submit", bg="lightblue", color="black", size="sm", on_click=rx.redirect("/budget_page"),),
             ),
             on_submit=FormState.handle_submit,
         ),

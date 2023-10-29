@@ -80,11 +80,11 @@ export default function Component() {
 </Menu>
 </HStack>
   <Image src={`/image-2.svg`} sx={{"width": "250px", "height": "350"}}/>
-  <Box as={`form`} onSubmit={(_e0) => addEvents([Event("form_state.handle_submit", {form_data:{"first_name": getRefValue(ref_first_name), "_last_name": getRefValue(ref__last_name)}})], (_e0))}>
+  <Box as={`form`} onSubmit={(_e0) => addEvents([Event("form_state.handle_submit", {form_data:{"_last_name": getRefValue(ref__last_name), "first_name": getRefValue(ref_first_name)}})], (_e0))}>
   <VStack>
   <Input id={`first_name`} placeholder={`             First Name`} ref={ref_first_name} type={`text`}/>
   <Input id={`  last_name`} placeholder={`             Last Name`} ref={ref__last_name} type={`text`}/>
-  <Button size={`sm`} sx={{"bg": "lightblue", "color": "black"}}>
+  <Button onClick={(_e) => addEvents([Event("_redirect", {path:`/budget_page`,external:false})], (_e))} size={`sm`} sx={{"bg": "lightblue", "color": "black"}}>
   {`Submit`}
 </Button>
 </VStack>
