@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, set_val, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Box, Button, Divider, Heading, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, VStack } from "@chakra-ui/react"
+import { Box, Button, Divider, Heading, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
 import NextHead from "next/head"
 
@@ -34,8 +34,9 @@ export default function Component() {
     }
   }, [router])
 
+  const ref_query = useRef(null); refs['ref_query'] = ref_query;
+  const ref_Cost = useRef(null); refs['ref_Cost'] = ref_Cost;
   const ref_first_name = useRef(null); refs['ref_first_name'] = ref_first_name;
-  const ref_last_name = useRef(null); refs['ref_last_name'] = ref_last_name;
 
   return (
     <Fragment>
@@ -65,22 +66,81 @@ export default function Component() {
 )}
 </Fragment>
   <VStack>
-  <Box as={`form`} onSubmit={(_e0) => addEvents([Event("form_state.handle_submit", {form_data:{"first_name": getRefValue(ref_first_name), "last_name": getRefValue(ref_last_name)}})], (_e0))}>
+  <Text>
+  {`Expenses`}
+</Text>
+  <Input id={`query`} placeholder={`Type to Search...`} ref={ref_query} type={`text`}/>
+  <Divider/>
+  <TableContainer>
+  <Table variant={`striped`}>
+  <Thead>
+  <Tr>
+  <Th>
+  {`Name`}
+</Th>
+  <Th>
+  {`Cost`}
+</Th>
+</Tr>
+</Thead>
+  <Tbody>
+  <Tr>
+  <Td>
+  {`Books`}
+</Td>
+  <Td>
+  {`30`}
+</Td>
+</Tr>
+  <Tr>
+  <Td>
+  {`Crack`}
+</Td>
+  <Td>
+  {`5`}
+</Td>
+</Tr>
+  <Tr>
+  <Td>
+  {`Food`}
+</Td>
+  <Td>
+  {`20`}
+</Td>
+</Tr>
+  <Tr>
+  <Td>
+  {`Transport`}
+</Td>
+  <Td>
+  {`60`}
+</Td>
+</Tr>
+</Tbody>
+</Table>
+</TableContainer>
+  <Divider/>
+  <Box as={`form`} onSubmit={(_e0) => addEvents([Event("form_state.handle_submit", {form_data:{"first_name": getRefValue(ref_first_name), "Cost": getRefValue(ref_Cost)}})], (_e0))}>
   <VStack>
+  <Heading>
+  {`Add Expenses`}
+</Heading>
+  <Text>
+  {JSON.stringify(form_state.form_data)}
+</Text>
   <Input id={`first_name`} placeholder={`First Name`} ref={ref_first_name} type={`text`}/>
-  <Input id={`last_name`} placeholder={`Last Name`} ref={ref_last_name} type={`text`}/>
+  <NumberInput onChange={(_e0) => addEvents([Event("form_state.set_number", {value:_e0})], (_e0))}>
+  <NumberInputField id={`Cost`} ref={ref_Cost}/>
+  <NumberInputStepper>
+  <NumberIncrementStepper/>
+  <NumberDecrementStepper/>
+</NumberInputStepper>
+</NumberInput>
   <Button type={`submit`}>
   {`Submit`}
 </Button>
 </VStack>
 </Box>
-  <Divider/>
-  <Heading>
-  {`Results`}
-</Heading>
-  <Text>
-  {JSON.stringify(form_state.form_data)}
-</Text>
 </VStack>
   <NextHead>
   <title>

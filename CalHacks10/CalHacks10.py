@@ -1,22 +1,35 @@
 import reflex as rx
 
+class User(rx.Model, table=True):
+    name: str
+    cost: int
+
 class FormState(rx.State):
 
+    name: str
+    users: list[User]
+
+    def get_users(self):
+        with rx.session() as session:
+            self.users = session.query(User).filter(User.name.contains(self.name)).all()
+
+    number: int
     form_data: dict = {}
 
     def handle_submit(self, form_data: dict):
         """Handle the form submit."""
         self.form_data = form_data
-        return [
-            rx.set_value(field_id, "")
-            for field_id in form_data
-        ]
+
+    def add_user(self):
+        with rx.session() as session:
+            session.add(User(name=self.name, cist=self.cost))
+            session.commit()
 
 def navbar():
     return rx.hstack(
         rx.hstack(
             rx.image(src="/budget-line-icon-logo-illustration-free-vector.jpg", width="50px"),
-            rx.heading("FuckThis"),
+            rx.heading("Budget App"),
         ),
         rx.spacer(),
         rx.menu(
@@ -55,22 +68,46 @@ def index():
 
 def budget():
     return rx.vstack(
+        rx.text("Expenses"),
+        rx.input(
+            placeholder="Type to Search...",
+            id="query",
+        ),
+
+
+        rx.divider(),
+
+        rx.table_container(
+            rx.table(
+                headers=["Name", "Cost"],
+                rows=[
+                    ["Books", 30],
+                    ["Crack", 5],
+                    ["Food", 20],
+                    ["Transport", 60],
+                ],
+                variant="striped",
+            ),
+        ),
+
+        rx.divider(),
+
         rx.form(
             rx.vstack(
+                rx.heading("Add Expenses"),
+                rx.text(FormState.form_data.to_string()),
                 rx.input(
                     placeholder="First Name",
                     id="first_name",
                 ),
-                rx.input(
-                    placeholder="Last Name", id="last_name"
+                rx.number_input(
+                    on_change=FormState.set_number,
+                    id="Cost",
                 ),
                 rx.button("Submit", type_="submit"),
             ),
             on_submit=FormState.handle_submit,
         ),
-        rx.divider(),
-        rx.heading("Results"),
-        rx.text(FormState.form_data.to_string()),
     )
 
 

@@ -34,8 +34,8 @@ export default function Component() {
     }
   }, [router])
 
-  const ref_first_name = useRef(null); refs['ref_first_name'] = ref_first_name;
   const ref__last_name = useRef(null); refs['ref__last_name'] = ref__last_name;
+  const ref_first_name = useRef(null); refs['ref_first_name'] = ref_first_name;
 
   return (
     <Fragment>
@@ -69,7 +69,7 @@ export default function Component() {
   <HStack>
   <Image src={`/budget-line-icon-logo-illustration-free-vector.jpg`} sx={{"width": "50px"}}/>
   <Heading>
-  {`FuckThis`}
+  {`Budget App`}
 </Heading>
 </HStack>
   <Spacer/>
@@ -80,7 +80,7 @@ export default function Component() {
 </Menu>
 </HStack>
   <Image src={`/image-2.svg`} sx={{"width": "250px", "height": "350"}}/>
-  <Box as={`form`} onSubmit={(_e0) => addEvents([Event("form_state.handle_submit", {form_data:{"_last_name": getRefValue(ref__last_name), "first_name": getRefValue(ref_first_name)}})], (_e0))}>
+  <Box as={`form`} onSubmit={(_e0) => addEvents([Event("form_state.handle_submit", {form_data:{"first_name": getRefValue(ref_first_name), "_last_name": getRefValue(ref__last_name)}})], (_e0))}>
   <VStack>
   <Input id={`first_name`} placeholder={`             First Name`} ref={ref_first_name} type={`text`}/>
   <Input id={`  last_name`} placeholder={`             Last Name`} ref={ref__last_name} type={`text`}/>
