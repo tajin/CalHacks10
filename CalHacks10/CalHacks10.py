@@ -2,7 +2,7 @@ import reflex as rx
 
 class FormState(rx.State):
 
-    form_data: dict = {}
+    form_data: dict ={}
 
     def handle_submit(self, form_data: dict):
         """Handle the form submit."""
@@ -11,21 +11,23 @@ class FormState(rx.State):
 
 def index():
     return rx.vstack(
+        rx.image(
+            src="/image-2.svg", width="250px", height="350"),
         rx.form(
             rx.vstack(
                 rx.input(
-                    placeholder="First name",
-                    id="first_name",
+                    placeholder="             First Name",
+                    id="first_name", #In future put First and Last in middle
                 ),
                 rx.input(
-                    placeholder="Last Name", id="last_name"
+                    placeholder="             Last Name", id="  last_name"
                 ),
-                rx.button("Submit", type_="submit"),
+                rx.button("Submit", bg="lightblue", color="black", size="sm"),
             ),
             on_submit=FormState.handle_submit,
         ),
         rx.divider(),
-        rx.heading("Test"),
+
         rx.text(FormState.form_data.to_string()),
     )
 app = rx.App()

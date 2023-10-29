@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { Event, getAllLocalStorageItems, getRefValue, getRefValues, isTrue, preventDefault, refs, set_val, spreadArraysOrObjects, uploadFiles, useEventLoop } from "/utils/state"
 import { ColorModeContext, EventLoopContext, initialEvents, StateContext } from "/utils/context.js"
 import "focus-visible/dist/focus-visible"
-import { Box, Button, Divider, Heading, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, VStack } from "@chakra-ui/react"
+import { Box, Button, Divider, Image, Input, Modal, ModalBody, ModalContent, ModalHeader, ModalOverlay, Text, VStack } from "@chakra-ui/react"
 import { getEventURL } from "/utils/state.js"
 import NextHead from "next/head"
 
@@ -34,8 +34,8 @@ export default function Component() {
     }
   }, [router])
 
+  const ref__last_name = useRef(null); refs['ref__last_name'] = ref__last_name;
   const ref_first_name = useRef(null); refs['ref_first_name'] = ref_first_name;
-  const ref_last_name = useRef(null); refs['ref_last_name'] = ref_last_name;
 
   return (
     <Fragment>
@@ -65,19 +65,17 @@ export default function Component() {
 )}
 </Fragment>
   <VStack>
-  <Box as={`form`} onSubmit={(_e0) => addEvents([Event("form_state.handle_submit", {form_data:{"last_name": getRefValue(ref_last_name), "first_name": getRefValue(ref_first_name)}})], (_e0))}>
+  <Image src={`/image-2.svg`} sx={{"width": "250px", "height": "350"}}/>
+  <Box as={`form`} onSubmit={(_e0) => addEvents([Event("form_state.handle_submit", {form_data:{"_last_name": getRefValue(ref__last_name), "first_name": getRefValue(ref_first_name)}})], (_e0))}>
   <VStack>
-  <Input id={`first_name`} placeholder={`First Name`} ref={ref_first_name} type={`text`}/>
-  <Input id={`last_name`} placeholder={`Last Name`} ref={ref_last_name} type={`text`}/>
-  <Button type={`submit`}>
+  <Input id={`first_name`} placeholder={`             First Name`} ref={ref_first_name} type={`text`}/>
+  <Input id={`  last_name`} placeholder={`             Last Name`} ref={ref__last_name} type={`text`}/>
+  <Button size={`sm`} sx={{"bg": "lightblue", "color": "black"}}>
   {`Submit`}
 </Button>
 </VStack>
 </Box>
   <Divider/>
-  <Heading>
-  {`Test`}
-</Heading>
   <Text>
   {JSON.stringify(form_state.form_data)}
 </Text>
