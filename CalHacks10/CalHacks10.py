@@ -14,7 +14,7 @@ def index():
         rx.form(
             rx.vstack(
                 rx.input(
-                    placeholder="First Name",
+                    placeholder="First name",
                     id="first_name",
                 ),
                 rx.input(
