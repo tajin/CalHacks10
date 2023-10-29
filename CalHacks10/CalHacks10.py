@@ -19,6 +19,7 @@ def index():
                     placeholder="             First Name",
                     id="first_name", #In future put First and Last in middle
                 ),
+
                 rx.input(
                     placeholder="             Last Name", id="  last_name"
                 ),
